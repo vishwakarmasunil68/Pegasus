@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "130853323294",
+    "firebase_url": "https://pegasus-6266e.firebaseio.com",
+    "project_id": "pegasus-6266e",
+    "storage_bucket": "pegasus-6266e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130853323294:android:f4ecc4dff03db0b6",
+        "android_client_info": {
+          "package_name": "com.bjain.pegasus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130853323294-el3hha0knilh7j4hs3ah4emofh0m6ap5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bjain.pegasus",
+            "certificate_hash": "728aad18cc8dd9985b09a679fb5c0c0b81a1ccc6"
+          }
+        },
+        {
+          "client_id": "130853323294-gteql14flpqdtmo0ebkngsd4pl3dq874.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0OPvm549Mgm0eij0pBt-Bus5yAKBnM1k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130853323294-gteql14flpqdtmo0ebkngsd4pl3dq874.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

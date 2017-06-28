@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fdf1f3"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/ic_ham"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_ham" />
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_app_icon" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_cart"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_cart" />
+
+            <ImageView
+                android:id="@+id/ic_fav"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_fav" />
+
+            <LinearLayout
+                android:id="@+id/ll_account"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_profile_icon"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_profile_name_toolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/frame_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="9">
+
+                            <LinearLayout
+                                android:id="@+id/ll_nav_cat"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:background="#eeeeee"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:src="@drawable/ic_nav_2" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_search"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="7"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:src="@drawable/ic_search" />
+
+                                <EditText
+                                    android:id="@+id/et_search"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:editable="false" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_barcode_scan"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:src="@drawable/ic_barcode_scanner" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+
+                <FrameLayout
+                    android:id="@+id/base_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/view_pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp" />
+
+                        <ImageView
+                            android:id="@+id/iv_bookito"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:adjustViewBounds="true"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:src="@drawable/ic_bookito" />
+
+                        <ImageView
+                            android:id="@+id/iv_best_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:adjustViewBounds="true"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:src="@drawable/ic_best_seller" />
+
+                        <ImageView
+                            android:id="@+id/iv_new_arrivals"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:adjustViewBounds="true"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:src="@drawable/ic_new_arrivals" />
+
+                        <FrameLayout
+                            android:id="@+id/frame_search_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="35dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:background="#318aaa"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="15dp"
+                                        android:text="SPECIAL DEALS"
+                                        android:textColor="#FFFFFF"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <android.support.v7.widget.RecyclerView
+                                    android:id="@+id/rv_special_deal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="5dp"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+
+                                    <TextView
+                                        android:id="@+id/tv_special_view_all"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="VIEW ALL" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="35dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="7dp"
+                                    android:background="#318aaa"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="15dp"
+                                        android:text="SHOP BY CATEGORY"
+                                        android:textColor="#FFFFFF"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="5dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="2">
+
+                                        <ImageView
+                                            android:id="@+id/iv_activity"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="2dp"
+                                            android:layout_weight="1"
+                                            android:adjustViewBounds="true"
+                                            android:src="@drawable/ic_activity" />
+
+                                        <ImageView
+                                            android:id="@+id/iv_colouring"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="2dp"
+                                            android:layout_weight="1"
+                                            android:adjustViewBounds="true"
+                                            android:src="@drawable/ic_colouring" />
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="2">
+
+                                        <ImageView
+                                            android:id="@+id/iv_education"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="2dp"
+                                            android:layout_weight="1"
+                                            android:adjustViewBounds="true"
+                                            android:src="@drawable/ic_education" />
+
+                                        <ImageView
+                                            android:id="@+id/iv_encyclopedias"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="2dp"
+                                            android:layout_weight="1"
+                                            android:adjustViewBounds="true"
+                                            android:src="@drawable/ic_encyclopedia" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="2">
+
+                                        <ImageView
+                                            android:id="@+id/iv_knowledge"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="2dp"
+                                            android:layout_weight="1"
+                                            android:adjustViewBounds="true"
+                                            android:src="@drawable/ic_knowledge" />
+
+                                        <ImageView
+                                            android:id="@+id/iv_pictures"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="2dp"
+                                            android:layout_weight="1"
+                                            android:adjustViewBounds="true"
+                                            android:src="@drawable/ic_picture_books" />
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="2">
+
+                                        <ImageView
+                                            android:id="@+id/iv_preschools"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="2dp"
+                                            android:layout_weight="1"
+                                            android:adjustViewBounds="true"
+                                            android:src="@drawable/ic_preschool" />
+
+                                        <ImageView
+                                            android:id="@+id/iv_puzzles"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="2dp"
+                                            android:layout_weight="1"
+                                            android:adjustViewBounds="true"
+                                            android:src="@drawable/ic_puzzles" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <ImageView
+                                            android:id="@+id/iv_readers"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="2dp"
+                                            android:adjustViewBounds="true"
+                                            android:src="@drawable/ic_readers" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                                <!--<com.crystal.crystalrangeseekbar.widgets.BubbleThumbRangeSeekbar-->
+
+                                <!--android:id="@+id/range_seekbar"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--app:corner_radius="10"-->
+                                <!--android:layout_marginTop="15dp"-->
+                                <!--android:layout_marginBottom="15dp"-->
+                                <!--app:min_value="1"-->
+                                <!--app:max_value="12"-->
+                                <!--app:steps="1"-->
+                                <!--app:bar_color="#F7BB88"-->
+                                <!--app:bar_highlight_color="#E07416"-->
+                                <!--app:data_type="_integer"/>-->
+
+                                <android.support.v7.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:cardElevation="1dp"
+                                    app:cardUseCompatPadding="true">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:padding="5dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="BROWSE BY AGE"
+                                            android:textColor="#318aaa"
+                                            android:textSize="18sp"
+                                            android:textStyle="bold" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="#BDBDBD" />
+
+                                        <com.appyvet.rangebar.RangeBar xmlns:custom="http://schemas.android.com/apk/res-auto"
+                                            android:id="@+id/range_bar"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:minHeight="100dp"
+                                            android:layout_marginLeft="16dp"
+                                            android:layout_marginRight="16dp"
+                                            custom:tickEnd="12"
+                                            custom:tickInterval="1"
+                                            custom:tickStart="1" />
+
+                                        <Button
+                                            android:id="@+id/btn_submit"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:background="@null"
+                                            android:gravity="center_horizontal"
+                                            android:text="Submit" />
+                                    </LinearLayout>
+                                </android.support.v7.widget.CardView>
+
+                                <ImageView
+                                    android:id="@+id/iv_find_us_near"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/ic_find_near" />
+
+                                <ImageView
+                                    android:id="@+id/iv_business"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/ic_business" />
+
+                                <ImageView
+                                    android:id="@+id/iv_opportunity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/ic_opportunity" />
+
+
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:fab="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/addFabLayoutContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end|bottom"
+            android:gravity="bottom|end">
+
+            <com.getbase.floatingactionbutton.FloatingActionsMenu
+                android:id="@+id/addFAB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp">
+
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chat"
+                    fab:fab_size="mini"
+                    fab:fab_title="chat" />
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_contact_us"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_contact_us"
+                    fab:fab_size="mini"
+                    fab:fab_title="Contact Us" />
+
+            </com.getbase.floatingactionbutton.FloatingActionsMenu>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

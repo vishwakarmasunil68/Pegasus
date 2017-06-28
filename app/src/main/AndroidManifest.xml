@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bjain.pegasus">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:name="android.support.multidex.MultiDexApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_app_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBwqFQy0qPFKEt2MAjPWqL_QUSAd3n-_qs" />
+
+        <activity
+            android:name=".activity.HomeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.RegistrationActivity" />
+        <activity android:name=".activity.CartCheckOutActivity" />
+        <activity android:name=".activity.AddNewAddressActivity" />
+        <activity android:name=".activity.OnlinePaymentActivity" />
+        <activity android:name=".activity.OrderListActivity" />
+        <activity android:name=".activity.OrderDetailActivity" />
+        <activity android:name=".activity.AccountActivity" />
+        <activity android:name=".activity.ContactUsActivity" />
+        <activity android:name=".activity.FindUsNearActivity" />
+        <activity android:name=".activity.ZxingScannerActivity"></activity>
+    </application>
+
+</manifest>
