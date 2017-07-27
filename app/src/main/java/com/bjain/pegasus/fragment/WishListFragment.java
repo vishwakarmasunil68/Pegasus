@@ -24,6 +24,7 @@ import com.bjain.pegasus.pojo.wishlist.WishListResultPOJO;
 import com.bjain.pegasus.pojo.wishlist.WishlistPOJO;
 import com.bjain.pegasus.utils.Pref;
 import com.bjain.pegasus.utils.StringUtils;
+import com.bjain.pegasus.utils.TagUtils;
 import com.bjain.pegasus.utils.ToastClass;
 import com.bjain.pegasus.webservice.WebServiceBase;
 import com.bjain.pegasus.webservice.WebServicesCallBack;
@@ -210,9 +211,10 @@ public class WishListFragment extends Fragment implements WebServicesCallBack {
             final EditText et_review = (EditText) view.findViewById(R.id.et_review);
             Button btn_update = (Button) view.findViewById(R.id.btn_update);
 
-
+            String image_url=WebServicesUrls.GetImageUrl(wishListResultPOJOList.get(i).getProduct_sku());
+            Log.d(TagUtils.getTag(),"image url:-"+image_url);
             Glide.with(getApplicationContext())
-                    .load(WebServicesUrls.IMAGE_BASE_URL + wishListResultPOJOList.get(i).getImage())
+                    .load(image_url)
                     .into(img_book);
 
             tv_price.setText(Pref.GetCurrency(getApplicationContext())+" " + wishListResultPOJOList.get(i).getPrice());

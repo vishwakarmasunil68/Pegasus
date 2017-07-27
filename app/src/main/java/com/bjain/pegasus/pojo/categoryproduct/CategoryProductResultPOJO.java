@@ -62,7 +62,7 @@ public class CategoryProductResultPOJO {
     private String url;
     private String discount_price;
     private String main_price;
-
+    private String image_url;
 
     public String getProductId() {
         return productId;
@@ -309,5 +309,13 @@ public class CategoryProductResultPOJO {
 
     public void setMain_price(String main_price) {
         this.main_price = main_price;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }

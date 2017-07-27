@@ -17,8 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bjain.pegasus.R;
-import com.bjain.pegasus.activity.CartCheckOutActivity;
 import com.bjain.pegasus.activity.HomeActivity;
+import com.bjain.pegasus.activity.NewCartCheckOutActivity;
 import com.bjain.pegasus.database.DatabaseHelper;
 import com.bjain.pegasus.pojo.cart.CartAttrPOJO;
 import com.bjain.pegasus.pojo.cart.CartDataPOJO;
@@ -101,7 +101,7 @@ public class CartFragment extends Fragment implements WebServicesCallBack {
             public void onClick(View v) {
 
                 if (mainCartPOJO != null && mainCartPOJO.getCartDataPOJOList().size() > 0) {
-                    Intent intent = new Intent(getActivity(), CartCheckOutActivity.class);
+                    Intent intent = new Intent(getActivity(), NewCartCheckOutActivity.class);
                     intent.putExtra("cartpojo", mainCartPOJO);
                     startActivity(intent);
                 } else {
@@ -180,12 +180,15 @@ public class CartFragment extends Fragment implements WebServicesCallBack {
                                     cartDataPOJO.setProduct_id(cartAttrPOJO.getProductId());
                                     cartDataPOJO.setProduct_name(cartAttrPOJO.getValue());
                                     cartDataPOJO.setQuantity(cartAttrPOJO.getQty());
-                                    cartDataPOJO.setProduct_sku(cartAttrPOJO.getSku());
+                                    cartDataPOJO.setSku1(cartAttrPOJO.getSku());
                                     cartDataPOJO.setProduct_price(cartAttrPOJO.getPrice());
                                     cartDataPOJO.setRow_price(cartAttrPOJO.getBasePrice());
                                     break;
                                 case "85":
                                     cartDataPOJO.setProduct_image(cartAttrPOJO.getValue());
+                                    break;
+                                case "222":
+                                    cartDataPOJO.setProduct_sku(cartAttrPOJO.getValue());
                                     break;
                             }
                         }
@@ -241,13 +244,15 @@ public class CartFragment extends Fragment implements WebServicesCallBack {
 
             final LinearLayout ll_cart_item = (LinearLayout) view.findViewById(R.id.ll_cart_item);
 
-            Log.d(TAG, "image url:-" + WebServicesUrls.IMAGE_BASE_URL + cartDataPOJOList.get(i).getProduct_image());
+//            Log.d(TAG, "image url:-" + WebServicesUrls.IMAGE_BASE_URL + cartDataPOJOList.get(i).getProduct_image());
+            String image_url=WebServicesUrls.GetImageUrl(cartDataPOJOList.get(i).getProduct_sku());
+            Log.d(TAG, "image url:-" + image_url);
             Glide.with(getApplicationContext())
-                    .load(WebServicesUrls.IMAGE_BASE_URL + cartDataPOJOList.get(i).getProduct_image())
+                    .load(image_url)
                     .into(img_book);
             tv_price.setText(Pref.GetCurrency(getApplicationContext()) + " " + getConvertedPrice(cartDataPOJOList.get(i).getRow_price()));
             tv_book_name.setText(cartDataPOJOList.get(i).getProduct_name());
-            tv_sku.setText("ISBN : "+cartDataPOJOList.get(i).getProduct_sku());
+            tv_sku.setText("ISBN : "+cartDataPOJOList.get(i).getSku1());
             tv_quant.setText(String.valueOf(converttoInt(cartDataPOJOList.get(i).getQuantity())));
             iv_decrease_product.setOnClickListener(new View.OnClickListener() {
                 @Override

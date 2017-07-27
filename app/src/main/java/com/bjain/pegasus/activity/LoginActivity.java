@@ -1,5 +1,6 @@
 package com.bjain.pegasus.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,9 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +21,8 @@ import com.bjain.pegasus.R;
 import com.bjain.pegasus.utils.FileUtils;
 import com.bjain.pegasus.utils.Pref;
 import com.bjain.pegasus.utils.StringUtils;
+import com.bjain.pegasus.utils.TagUtils;
+import com.bjain.pegasus.utils.ToastClass;
 import com.bjain.pegasus.webservice.WebServiceBase;
 import com.bjain.pegasus.webservice.WebServicesCallBack;
 import com.bjain.pegasus.webservice.WebServicesUrls;
@@ -45,6 +51,7 @@ import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity implements WebServicesCallBack {
 
+    private static final String FORGOT_PASSWORD = "forgot_password";
     private final String TAG = getClass().getSimpleName();
     private final String LOGIN_API_CALL = "login_api_call";
     @BindView(R.id.et_password)
@@ -59,6 +66,8 @@ public class LoginActivity extends AppCompatActivity implements WebServicesCallB
     ImageView iv_fb_login;
     @BindView(R.id.tv_dont_have_account)
     TextView tv_dont_have_account;
+    @BindView(R.id.tv_forgot_password)
+    TextView tv_forgot_password;
 
     CallbackManager callbackManager;
 
@@ -96,7 +105,7 @@ public class LoginActivity extends AppCompatActivity implements WebServicesCallB
             @Override
             public void onClick(View view) {
                 if (CheckValidation(et_email, et_password)) {
-                    callLoginAPI(et_email.getText().toString());
+                    callLoginAPI(et_email.getText().toString(),et_password.getText().toString());
                 } else {
                     Toast.makeText(getApplicationContext(), "Please Enter Mandatory Data", Toast.LENGTH_LONG).show();
                 }
@@ -116,6 +125,43 @@ public class LoginActivity extends AppCompatActivity implements WebServicesCallB
                 finish();
             }
         });
+        tv_forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showForgotPasswordDialog();
+            }
+        });
+    }
+
+    public void showForgotPasswordDialog(){
+        final Dialog dialog1 = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+//        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+        dialog1.setContentView(R.layout.dialog_forgot_password);
+        dialog1.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        dialog1.setTitle("Forgot Password");
+        dialog1.setCancelable(true);
+        dialog1.show();
+        Window window = dialog1.getWindow();
+        window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        Button btn_send= (Button) dialog1.findViewById(R.id.btn_send);
+        final EditText et_email= (EditText) dialog1.findViewById(R.id.et_email);
+
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email=et_email.getText().toString();
+                if(email.length()>0){
+                    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                    nameValuePairs.add(new BasicNameValuePair("email", email));
+                    new WebServiceBase(nameValuePairs, LoginActivity.this, FORGOT_PASSWORD).execute(WebServicesUrls.FORGOT_PASSWORD_URL);
+                    dialog1.dismiss();
+                }else{
+                    ToastClass.showShortToast(getApplicationContext(),"Please Enter your Email");
+                }
+            }
+        });
+
     }
 
     public void FbIntegration() {
@@ -146,7 +192,7 @@ public class LoginActivity extends AppCompatActivity implements WebServicesCallB
                                 "" + "," + "1234";
 
                         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                        callLoginAPI(json.getString("email"));
+                        FacebookcallLoginAPI(json.getString("email"));
                     }
 
                 } catch (JSONException e) {
@@ -177,7 +223,13 @@ public class LoginActivity extends AppCompatActivity implements WebServicesCallB
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void callLoginAPI(String email) {
+    public void callLoginAPI(String email,String password) {
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("reg_email", email));
+        nameValuePairs.add(new BasicNameValuePair("password", password));
+        new WebServiceBase(nameValuePairs, this, LOGIN_API_CALL).execute(WebServicesUrls.NEW_LOGIN_API_URL);
+    }
+    public void FacebookcallLoginAPI(String email) {
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("reg_email", email));
         new WebServiceBase(nameValuePairs, this, LOGIN_API_CALL).execute(WebServicesUrls.LOGIN_API_URL);
@@ -191,6 +243,27 @@ public class LoginActivity extends AppCompatActivity implements WebServicesCallB
             case LOGIN_API_CALL:
                 parseLoginData(response);
                 break;
+            case FORGOT_PASSWORD:
+                parseForgotPasswordResponse(response);
+                break;
+        }
+    }
+
+    public void parseForgotPasswordResponse(String response){
+        Log.d(TagUtils.getTag(),"forget response:-"+response);
+        try{
+
+            JSONObject jsonObject=new JSONObject(response);
+            if(jsonObject.optString("sucess").equals("true")){
+                ToastClass.showShortToast(getApplicationContext(),"Reset password link has been sent to your mail.");
+            }else{
+                ToastClass.showShortToast(getApplicationContext(),"Email Id does not Exist.");
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            ToastClass.showShortToast(getApplicationContext(),"something went wrong");
         }
     }
 

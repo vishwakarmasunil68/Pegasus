@@ -53,6 +53,8 @@ public class GradeFragment extends Fragment implements WebServicesCallBack {
     RecyclerView rv_books;
     @BindView(R.id.spinner_grade)
     Spinner spinner_grade;
+    @BindView(R.id.spinner_category)
+    Spinner spinner_category;
 
     List<String> passgradeString;
     List<String> passcategoryString;
@@ -109,12 +111,31 @@ public class GradeFragment extends Fragment implements WebServicesCallBack {
         // attaching data adapter to spinner
         spinner_grade.setAdapter(arrayAdapter);
 
+
+        List<String> stringList=new ArrayList<>();
+        stringList.add("ALL");
+        stringList.add("ACTIVITY BOOKS");
+        stringList.add("CHARTS");
+        stringList.add("LIBRARY BOOKS");
+        stringList.add("READERS BOOKS");
+        stringList.add("TEXTBOOK");
+        stringList.add("WORKBOOK");
+
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, stringList);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner_category.setAdapter(categoryAdapter);
+
         spinner_grade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                HomeActivity homeActivity = (HomeActivity) getActivity();
-                homeActivity.setGradeCategorySelection(0, false);
+//                HomeActivity homeActivity = (HomeActivity) getActivity();
+//                homeActivity.setGradeCategorySelection(0, false);
                 callGradeBooksFragment(0,position);
+                spinner_category.setOnItemSelectedListener(null);
+                spinner_category.setSelection(0);
+                categoryspinnerselection();
             }
 
             @Override
@@ -124,7 +145,19 @@ public class GradeFragment extends Fragment implements WebServicesCallBack {
         });
 
     }
+    public void categoryspinnerselection(){
+        spinner_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                GetSelectedCategory(position);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
 
     public void GetSelectedCategory(int position) {
         callGradeBooksFragment(position,spinner_grade.getSelectedItemPosition());
@@ -134,15 +167,15 @@ public class GradeFragment extends Fragment implements WebServicesCallBack {
     @Override
     public void onResume() {
         super.onResume();
-        HomeActivity homeActivity = (HomeActivity) getActivity();
-        homeActivity.showOpportunityNav();
+//        HomeActivity homeActivity = (HomeActivity) getActivity();
+//        homeActivity.showOpportunityNav();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        HomeActivity homeActivity = (HomeActivity) getActivity();
-        homeActivity.hideOpptunityNav();
+//        HomeActivity homeActivity = (HomeActivity) getActivity();
+//        homeActivity.hideOpptunityNav();
     }
 
     @Override
@@ -224,10 +257,11 @@ public class GradeFragment extends Fragment implements WebServicesCallBack {
                                     newArrivalDataPOJO.setProduct_name(gradeResultPOJO.getValue());
                                     newArrivalDataPOJO.setDiscount_price(gradeResultPOJO.getDiscountPrice());
                                     newArrivalDataPOJO.setMain_price(gradeResultPOJO.getMainPrice());
+                                    newArrivalDataPOJO.setProduct_image(gradeResultPOJO.getImage_url());
                                     break;
-                                case "85":
-                                    newArrivalDataPOJO.setProduct_image(gradeResultPOJO.getValue());
-                                    break;
+//                                case "85":
+//                                    newArrivalDataPOJO.setProduct_image(gradeResultPOJO.getValue());
+//                                    break;
                                 case "222":
                                     newArrivalDataPOJO.setSku(gradeResultPOJO.getValue());
                                     break;
@@ -288,10 +322,11 @@ public class GradeFragment extends Fragment implements WebServicesCallBack {
                                     newArrivalDataPOJO.setProduct_name(newArrivalResultPOJO.getValue());
                                     newArrivalDataPOJO.setDiscount_price(newArrivalResultPOJO.getDiscountPrice());
                                     newArrivalDataPOJO.setMain_price(newArrivalResultPOJO.getMainPrice());
+                                    newArrivalDataPOJO.setProduct_image(newArrivalResultPOJO.getImage_url());
                                     break;
-                                case "85":
-                                    newArrivalDataPOJO.setProduct_image(newArrivalResultPOJO.getValue());
-                                    break;
+//                                case "85":
+//                                    newArrivalDataPOJO.setProduct_image(newArrivalResultPOJO.getValue());
+//                                    break;
                                 case "222":
                                     newArrivalDataPOJO.setSku(newArrivalResultPOJO.getValue());
                                     break;

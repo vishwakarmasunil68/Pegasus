@@ -32,6 +32,8 @@ public class NewArrivalResultPOJO {
     private String discountPrice;
     @SerializedName("main_price")
     private String mainPrice;
+    @SerializedName("image_url")
+    private String image_url;
 
     public String getValueId() {
         return valueId;
@@ -145,5 +147,13 @@ public class NewArrivalResultPOJO {
                 ", discountPrice='" + discountPrice + '\'' +
                 ", mainPrice='" + mainPrice + '\'' +
                 '}';
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }

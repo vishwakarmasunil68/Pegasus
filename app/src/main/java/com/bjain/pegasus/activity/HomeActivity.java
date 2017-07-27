@@ -1,12 +1,14 @@
 package com.bjain.pegasus.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.NavigationView;
@@ -537,7 +539,6 @@ public class HomeActivity extends AppCompatActivity implements WebServicesCallBa
             listofGradeCategories.get(position).setBackgroundColor(Color.parseColor("#bf1e2d"));
             listofTextGrade.get(position).setTextColor(Color.parseColor("#FFFFFF"));
             mDrawer.closeDrawers();
-
         }
         catch (Exception e){
             e.printStackTrace();
@@ -726,7 +727,7 @@ public class HomeActivity extends AppCompatActivity implements WebServicesCallBa
         }
     }
 
-    public void parseCategoryProductData(String response) {
+    public CategoryProductPOJO parseCategoryProductData(String response) {
         Log.d(TAG, "category product response:-" + response);
 //        try {
 //            Gson gson = new Gson();
@@ -769,9 +770,13 @@ public class HomeActivity extends AppCompatActivity implements WebServicesCallBa
                                     categoryResultPOJO.setPrice(newCategoryResultPOJO.getMainPrice());
                                     categoryResultPOJO.setMain_price(newCategoryResultPOJO.getMainPrice());
                                     categoryResultPOJO.setDiscount_price(newCategoryResultPOJO.getDiscountPrice());
+                                    categoryResultPOJO.setImage_url(newCategoryResultPOJO.getImage_url());
                                     break;
                                 case "85":
                                     categoryResultPOJO.setUrl(newCategoryResultPOJO.getValue());
+                                    break;
+                                case "222":
+                                    categoryResultPOJO.setSku(newCategoryResultPOJO.getValue());
                                     break;
                             }
                         }
@@ -783,14 +788,16 @@ public class HomeActivity extends AppCompatActivity implements WebServicesCallBa
                 categoryProductPOJO.setCategoryProductResultPOJOs(categoryProductResultPOJOList);
 
                 Log.d(TAG,"category products:-"+categoryProductPOJO.toString());
-                showCategoryProductsFragment(categoryProductPOJO);
-
+//                showCategoryProductsFragment(categoryProductPOJO);
+                return categoryProductPOJO;
             }else{
-                ToastClass.showShortToast(getApplicationContext(),"No Product Found");
+                return null;
+//                ToastClass.showShortToast(getApplicationContext(),"No Product Found");
             }
         }catch (Exception e){
-            ToastClass.showShortToast(getApplicationContext(),"No Product Found");
+//            ToastClass.showShortToast(getApplicationContext(),"No Product Found");
             e.printStackTrace();
+            return null;
         }
     }
 
@@ -1100,7 +1107,7 @@ public class HomeActivity extends AppCompatActivity implements WebServicesCallBa
                 View view = inflater.inflate(R.layout.inflate_category, null);
 
                 TextView tv_category_name = (TextView) view.findViewById(R.id.tv_category_name);
-                ImageView iv_catvisible = (ImageView) view.findViewById(R.id.iv_catvisible);
+                final ImageView iv_catvisible = (ImageView) view.findViewById(R.id.iv_catvisible);
                 final LinearLayout ll_category_data = (LinearLayout) view.findViewById(R.id.ll_category_data);
 
 
@@ -1111,8 +1118,10 @@ public class HomeActivity extends AppCompatActivity implements WebServicesCallBa
                     public void onClick(View v) {
                         if (ll_category_data.getVisibility() == View.VISIBLE) {
                             ll_category_data.setVisibility(View.GONE);
+                            iv_catvisible.setImageResource(R.drawable.ic_cat_max);
                         } else {
                             ll_category_data.setVisibility(View.VISIBLE);
+                            iv_catvisible.setImageResource(R.drawable.ic_cat_min);
                         }
                     }
                 });
@@ -1124,8 +1133,10 @@ public class HomeActivity extends AppCompatActivity implements WebServicesCallBa
                     public void onClick(View v) {
                         if (ll_category_data.getVisibility() == View.VISIBLE) {
                             ll_category_data.setVisibility(View.GONE);
+                            iv_catvisible.setImageResource(R.drawable.ic_cat_max);
                         } else {
                             ll_category_data.setVisibility(View.VISIBLE);
+                            iv_catvisible.setImageResource(R.drawable.ic_cat_min);
                         }
                     }
                 });
@@ -1411,13 +1422,62 @@ public class HomeActivity extends AppCompatActivity implements WebServicesCallBa
         }
     }
 
-    public void callCategoryProductAPI(String category_id) {
-//        parseCategoryProductData(Pref.CATEGORY_ACTITIVTY_DATA);
-        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        nameValuePairs.add(new BasicNameValuePair("cat_id", category_id));
-        new WebServiceBase(nameValuePairs, this, CATEGORY_API).execute(WebServicesUrls.NEW_CATEGORY_PRODUCT_URL);
-    }
+//    public void callCategoryProductAPI(String category_id) {
+////        parseCategoryProductData(Pref.CATEGORY_ACTITIVTY_DATA);
+//        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+//        nameValuePairs.add(new BasicNameValuePair("cat_id", category_id));
+//        new WebServiceBase(nameValuePairs, this, CATEGORY_API).execute(WebServicesUrls.NEW_CATEGORY_PRODUCT_URL);
+//    }
 
+    public void callCategoryProductAPI(final String category_id){
+        new AsyncTask<String,Void,String>(){
+            String jResult;
+            ProgressDialog progressDialog;
+            CategoryProductPOJO categoryProductPOJO;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = new ProgressDialog(HomeActivity.this);
+                progressDialog.setMessage("Please Wait...");
+                progressDialog.setCancelable(true);
+                progressDialog.show();
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                try {
+                    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                    nameValuePairs.add(new BasicNameValuePair("cat_id", category_id));
+                    jResult = WebServiceBase.httpCall(params[0], nameValuePairs);
+
+                    categoryProductPOJO=parseCategoryProductData(jResult);
+
+
+                } catch (Exception e) {
+                    if(progressDialog!=null){
+                        progressDialog.dismiss();
+                    }
+                    e.printStackTrace();
+                }
+                return jResult;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                if(progressDialog!=null){
+                    progressDialog.dismiss();
+                }
+                if(categoryProductPOJO!=null&&categoryProductPOJO.getCategoryProductResultPOJOs()!=null&&
+                        categoryProductPOJO.getCategoryProductResultPOJOs().size()>0){
+                    showCategoryProductsFragment(categoryProductPOJO);
+                }else{
+                    ToastClass.showShortToast(getApplicationContext(),"No Products Found");
+                }
+
+            }
+        }.execute(WebServicesUrls.NEW_CATEGORY_PRODUCT_URL);
+    }
 
     public void callRemoveFromCartAPI(String cart_id, String product_id, View view) {
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();

@@ -3,6 +3,7 @@ package com.bjain.pegasus.adapter;
 import android.app.Activity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.bjain.pegasus.R;
 import com.bjain.pegasus.activity.HomeActivity;
 import com.bjain.pegasus.pojo.newsearch.NewSearchResultPOJO;
 import com.bjain.pegasus.utils.Pref;
+import com.bjain.pegasus.utils.TagUtils;
 import com.bumptech.glide.Glide;
 
 import org.sufficientlysecure.htmltextview.HtmlResImageGetter;
@@ -69,7 +71,9 @@ public class SearchProductAdapter extends RecyclerView.Adapter<SearchProductAdap
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        Glide.with(activity).load("http://www.pegasusforkids.com/media/catalog/product" + horizontalList.get(position).getProduct_image()).into(holder.iv_product);
+//        String image_url= WebServicesUrls.GetImageUrl(horizontalList.get(position).getIsbn());
+        Log.d(TagUtils.getTag(),"image url:-"+horizontalList.get(position).getImage_url());
+        Glide.with(activity).load(horizontalList.get(position).getImage_url()).into(holder.iv_product);
         holder.tv_name.setText(horizontalList.get(position).getProduct_name());
 
         String main_price="<s>"+Pref.GetCurrency(activity.getApplicationContext())+" " + horizontalList.get(position).getMain_price()+"</s>";

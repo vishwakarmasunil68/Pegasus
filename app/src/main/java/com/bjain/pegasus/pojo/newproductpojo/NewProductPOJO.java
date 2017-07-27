@@ -14,7 +14,7 @@ public class NewProductPOJO {
     @SerializedName("result")
     List<NewProductResultPOJO> newProductResultPOJOList;
     @SerializedName("Galary")
-    List<GalaryPOJO> galaryPOJOList;
+    List<String> galaryPOJOList;
     @SerializedName("pgsprice")
     PricePOJO pricePOJO;
 
@@ -34,14 +34,6 @@ public class NewProductPOJO {
         this.newProductResultPOJOList = newProductResultPOJOList;
     }
 
-    public List<GalaryPOJO> getGalaryPOJOList() {
-        return galaryPOJOList;
-    }
-
-    public void setGalaryPOJOList(List<GalaryPOJO> galaryPOJOList) {
-        this.galaryPOJOList = galaryPOJOList;
-    }
-
     public PricePOJO getPricePOJO() {
         return pricePOJO;
     }
@@ -58,5 +50,13 @@ public class NewProductPOJO {
                 ", galaryPOJOList=" + galaryPOJOList +
                 ", pricePOJO=" + pricePOJO +
                 '}';
+    }
+
+    public List<String> getGalaryPOJOList() {
+        return galaryPOJOList;
+    }
+
+    public void setGalaryPOJOList(List<String> galaryPOJOList) {
+        this.galaryPOJOList = galaryPOJOList;
     }
 }

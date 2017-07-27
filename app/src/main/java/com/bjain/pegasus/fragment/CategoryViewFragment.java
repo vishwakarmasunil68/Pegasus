@@ -19,11 +19,15 @@ import com.bjain.pegasus.pojo.category.CategoryResultPOJO;
 import com.bjain.pegasus.utils.Pref;
 import com.bjain.pegasus.utils.StringUtils;
 import com.bjain.pegasus.utils.TagUtils;
+import com.bjain.pegasus.webservice.GetWebServices;
+import com.bjain.pegasus.webservice.WebServicesUrls;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by sunil on 05-06-2017.
@@ -33,7 +37,7 @@ public class CategoryViewFragment extends Fragment {
 
     @BindView(R.id.ll_nav_cat_level0)
     LinearLayout ll_nav_cat_level0;
-
+    private static final String GET_CATEGORY_DATA = "get_category_data";
     public CategoryViewFragment() {
 
     }
@@ -58,14 +62,30 @@ public class CategoryViewFragment extends Fragment {
 //        if (categoryResultPOJOList != null && categoryResultPOJOList.size() > 0) {
 //            inflateCategory(categoryResultPOJOList);
 //        }
-        try {
-            CategoryPOJO categoryPOJO = (CategoryPOJO) Pref.GetPOJO(getActivity().getApplicationContext(), StringUtils.CATEGORY_TYPE, StringUtils.CATEGORY_TYPE);
-            Log.d(TagUtils.getTag(),"category pojos:-"+categoryPOJO.toString());
-            CategoryResultPOJO categoryResultPOJO = categoryPOJO.getCategoryResultPOJO().
-                    getCategoryResultPOJOList().get(0).getCategoryResultPOJOList().get(0);
-            inflateCategory(categoryResultPOJO.getCategoryResultPOJOList());
+        try{
+            CategoryPOJO categoryPOJO=(CategoryPOJO) Pref.GetPOJO(getActivity().getApplicationContext(),StringUtils.CATEGORY_TYPE,StringUtils.CATEGORY_TYPE);
+            if(categoryPOJO!=null) {
+                loadCategory(categoryPOJO);
+            }else{
+                new GetWebServices(getActivity(),this, GET_CATEGORY_DATA).execute(WebServicesUrls.CATEGORY_DATA_URL);
+            }
         }catch (Exception e){
             e.printStackTrace();
+            new GetWebServices(getActivity(),this, GET_CATEGORY_DATA).execute(WebServicesUrls.CATEGORY_DATA_URL);
+        }
+    }
+    List<CategoryResultPOJO> categoryResultPOJOList;
+    public void loadCategory(CategoryPOJO categoryPOJO){
+        if (categoryPOJO.getSuccess().equals("true")) {
+            CategoryResultPOJO categoryResultPOJO = categoryPOJO.getCategoryResultPOJO().
+                    getCategoryResultPOJOList().get(0).getCategoryResultPOJOList().get(0);
+            Log.d(TagUtils.getTag(), "category result:-" + categoryResultPOJO.toString());
+            categoryResultPOJOList = categoryResultPOJO.getCategoryResultPOJOList();
+            Pref.SavePOJO(getApplicationContext(),StringUtils.CATEGORY_TYPE,categoryPOJO);
+//                Pref.SavePOJO(getApplicationContext(),StringUtils.CATEGORY_TYPE,categoryPOJO);
+            inflateCategory(categoryResultPOJO.getCategoryResultPOJOList());
+        } else {
+
         }
     }
 
@@ -77,7 +97,7 @@ public class CategoryViewFragment extends Fragment {
                 View view = inflater.inflate(R.layout.inflate_category, null);
 
                 TextView tv_category_name = (TextView) view.findViewById(R.id.tv_category_name);
-                ImageView iv_catvisible = (ImageView) view.findViewById(R.id.iv_catvisible);
+                final ImageView iv_catvisible = (ImageView) view.findViewById(R.id.iv_catvisible);
                 final LinearLayout ll_category_data = (LinearLayout) view.findViewById(R.id.ll_category_data);
 
 
@@ -88,8 +108,10 @@ public class CategoryViewFragment extends Fragment {
                     public void onClick(View v) {
                         if (ll_category_data.getVisibility() == View.VISIBLE) {
                             ll_category_data.setVisibility(View.GONE);
+                            iv_catvisible.setImageResource(R.drawable.ic_cat_max);
                         } else {
                             ll_category_data.setVisibility(View.VISIBLE);
+                            iv_catvisible.setImageResource(R.drawable.ic_cat_min);
                         }
                     }
                 });
@@ -100,8 +122,10 @@ public class CategoryViewFragment extends Fragment {
                     public void onClick(View v) {
                         if (ll_category_data.getVisibility() == View.VISIBLE) {
                             ll_category_data.setVisibility(View.GONE);
+                            iv_catvisible.setImageResource(R.drawable.ic_cat_max);
                         } else {
                             ll_category_data.setVisibility(View.VISIBLE);
+                            iv_catvisible.setImageResource(R.drawable.ic_cat_min);
                         }
                     }
                 });

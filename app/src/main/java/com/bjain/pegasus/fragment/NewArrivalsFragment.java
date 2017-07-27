@@ -149,10 +149,11 @@ public class NewArrivalsFragment extends Fragment implements WebServicesCallBack
                                     newArrivalDataPOJO.setProduct_name(newArrivalResultPOJO.getValue());
                                     newArrivalDataPOJO.setDiscount_price(newArrivalResultPOJO.getDiscountPrice());
                                     newArrivalDataPOJO.setMain_price(newArrivalResultPOJO.getMainPrice());
+                                    newArrivalDataPOJO.setProduct_image(newArrivalResultPOJO.getImage_url());
                                     break;
-                                case "85":
-                                    newArrivalDataPOJO.setProduct_image(newArrivalResultPOJO.getValue());
-                                    break;
+//                                case "85":
+//                                    newArrivalDataPOJO.setProduct_image(newArrivalResultPOJO.getValue());
+//                                    break;
                                 case "222":
                                     newArrivalDataPOJO.setSku(newArrivalResultPOJO.getValue());
                                     break;

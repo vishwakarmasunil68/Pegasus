@@ -2,7 +2,7 @@
     <string name="app_name">Pegasus</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="facebook_app_id">548954515493522</string>
+    <string name="facebook_app_id">108031033170181</string>
     <string name="Rs">\u20B9</string>
 
     <string-array name="sorting_type">
@@ -13,7 +13,7 @@
 
     <string-array name="filter_type">
         <item>Filter by</item>
-        <item>Ascending</item>
-        <item>Descending</item>
+        <item>Low to High</item>
+        <item>High to Low</item>
     </string-array>
 </resources>

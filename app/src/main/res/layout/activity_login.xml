@@ -89,10 +89,20 @@
                         android:src="@drawable/ic_fb_login" />
 
                     <TextView
+                        android:id="@+id/tv_forgot_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|right"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center|right"
+                        android:text="Forgot Password" />
+
+                    <TextView
                         android:id="@+id/tv_dont_have_account"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|right"
+                        android:layout_marginTop="10dp"
                         android:gravity="center|right"
                         android:text="Don't Have Account?" />
 

@@ -15,6 +15,7 @@ public class CartDataPOJO implements Serializable {
     String product_sku;
     String row_price;
     String product_image;
+    String sku1;
 
     public CartDataPOJO(String cart_id, String product_id, String product_price, String quantity, String product_name, String product_sku, String product_image) {
         this.cart_id = cart_id;
@@ -105,5 +106,13 @@ public class CartDataPOJO implements Serializable {
                 ", row_price='" + row_price + '\'' +
                 ", product_image='" + product_image + '\'' +
                 '}';
+    }
+
+    public String getSku1() {
+        return sku1;
+    }
+
+    public void setSku1(String sku1) {
+        this.sku1 = sku1;
     }
 }

@@ -78,9 +78,10 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         }catch (Exception e){
             e.printStackTrace();
         }
-        Log.d(TAG,"image url:-"+WebServicesUrls.IMAGE_BASE_URL+horizontalList.get(position).getProduct_image());
+//        Log.d(TAG,"image url:-"+WebServicesUrls.IMAGE_BASE_URL+horizontalList.get(position).getProduct_image());
+        Log.d(TAG,"image url:-"+WebServicesUrls.GetImageUrl(horizontalList.get(position).getProduct_sku()));
         Glide.with(activity.getApplicationContext())
-                .load(WebServicesUrls.IMAGE_BASE_URL+horizontalList.get(position).getProduct_image())
+                .load(WebServicesUrls.GetImageUrl(horizontalList.get(position).getProduct_sku()))
                 .into(holder.iv_product);
 
         holder.ll_product.setOnClickListener(new View.OnClickListener() {

@@ -2,11 +2,13 @@ package com.bjain.pegasus.pojo.address;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by sunil on 01-06-2017.
  */
 
-public class AddressDataPOJO {
+public class AddressDataPOJO implements Serializable{
     @SerializedName("first_name")
     String first_name;
     @SerializedName("last_name")

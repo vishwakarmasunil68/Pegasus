@@ -282,7 +282,7 @@ public class RegistrationActivity extends AppCompatActivity implements WebServic
 //                        getBitmapCallApi(profile_url,json.getString("name"),
 //                                json.getString("email"),"");
                         String request_data=json.getString("name")+","+""+","+
-                                ""+","+"1234";
+                                ""+","+"123456";
 
                         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                         nameValuePairs.add(new BasicNameValuePair("email", json.getString("email")));

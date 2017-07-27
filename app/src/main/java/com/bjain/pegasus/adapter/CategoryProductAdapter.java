@@ -3,6 +3,7 @@ package com.bjain.pegasus.adapter;
 import android.app.Activity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.bjain.pegasus.R;
 import com.bjain.pegasus.activity.HomeActivity;
 import com.bjain.pegasus.pojo.categoryproduct.CategoryProductResultPOJO;
 import com.bjain.pegasus.utils.Pref;
+import com.bjain.pegasus.utils.TagUtils;
 import com.bumptech.glide.Glide;
 
 import org.sufficientlysecure.htmltextview.HtmlResImageGetter;
@@ -70,7 +72,11 @@ public class CategoryProductAdapter extends RecyclerView.Adapter<CategoryProduct
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        Glide.with(activity).load("http://www.pegasusforkids.com/media/catalog/product"+horizontalList.get(position).getUrl()).into(holder.iv_product);
+//        String image_url="https://www.pegasusforkids.com/media/catalog/product"+horizontalList.get(position).getUrl();
+//        String image_url="https://www.pegasusforkids.com/media/import/"+horizontalList.get(position).getSku()+".jpg";
+        String image_url=horizontalList.get(position).getImage_url();
+        Log.d(TagUtils.getTag(),"image url:-"+image_url);
+        Glide.with(activity).load(image_url).into(holder.iv_product);
         holder.tv_name.setText(horizontalList.get(position).getName());
 
         try {

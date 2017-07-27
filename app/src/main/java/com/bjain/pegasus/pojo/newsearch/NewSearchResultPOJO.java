@@ -21,6 +21,10 @@ public class NewSearchResultPOJO {
     String attribute_id;
     @SerializedName("sku")
     String sku;
+    @SerializedName("isbn")
+    String isbn;
+    @SerializedName("image_url")
+    String image_url;
 
     @Override
     public int hashCode() {
@@ -100,17 +104,6 @@ public class NewSearchResultPOJO {
         this.sku = sku;
     }
 
-    @Override
-    public String toString() {
-        return "NewSearchResultPOJO{" +
-                "product_id='" + product_id + '\'' +
-                ", discount_price='" + discount_price + '\'' +
-                ", main_price='" + main_price + '\'' +
-                ", product_image='" + product_image + '\'' +
-                ", attribute_id='" + attribute_id + '\'' +
-                '}';
-    }
-
 
     public String getProduct_name() {
         return product_name;
@@ -118,5 +111,35 @@ public class NewSearchResultPOJO {
 
     public void setProduct_name(String product_name) {
         this.product_name = product_name;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    @Override
+    public String toString() {
+        return "NewSearchResultPOJO{" +
+                "product_id='" + product_id + '\'' +
+                ", product_name='" + product_name + '\'' +
+                ", discount_price='" + discount_price + '\'' +
+                ", main_price='" + main_price + '\'' +
+                ", product_image='" + product_image + '\'' +
+                ", attribute_id='" + attribute_id + '\'' +
+                ", sku='" + sku + '\'' +
+                ", isbn='" + isbn + '\'' +
+                '}';
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }

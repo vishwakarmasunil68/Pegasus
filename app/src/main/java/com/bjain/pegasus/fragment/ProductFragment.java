@@ -27,7 +27,6 @@ import com.bjain.pegasus.activity.HomeActivity;
 import com.bjain.pegasus.adapter.ProductImageSwipeAdapter;
 import com.bjain.pegasus.adapter.RelatedProductAdapter;
 import com.bjain.pegasus.database.DatabaseHelper;
-import com.bjain.pegasus.pojo.newproductpojo.GalaryPOJO;
 import com.bjain.pegasus.pojo.newproductpojo.NewProductPOJO;
 import com.bjain.pegasus.pojo.newproductpojo.NewProductResultPOJO;
 import com.bjain.pegasus.pojo.productview.SingleProductPOJO;
@@ -247,12 +246,11 @@ public class ProductFragment extends Fragment implements WebServicesCallBack {
                 }
                 showProduct(singleProductPOJO);
 
-                List<String> list_images = new ArrayList<>();
-                for (GalaryPOJO galaryPOJO : newProductPOJO.getGalaryPOJOList()) {
-                    list_images.add("http://www.pegasusforkids.com/media/catalog/product" + galaryPOJO.getValue());
+                List<String> list_images = newProductPOJO.getGalaryPOJOList();
+                if(list_images!=null&&list_images.size()>0) {
+                    Log.d(TagUtils.getTag(), "images:-" + list_images.toString());
+                    setUpViewPager(list_images);
                 }
-                Log.d(TagUtils.getTag(), "images:-" + list_images.toString());
-                setUpViewPager(list_images);
             } else {
                 ToastClass.showShortToast(getActivity().getApplicationContext(), "something went wrong");
             }

@@ -36,10 +36,11 @@
                 <ImageView
                     android:id="@+id/iv_back"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/ic_app_icon" />
+                    android:src="@drawable/ic_app_logo" />
 
             </LinearLayout>
 
@@ -459,9 +460,9 @@
                                             android:id="@+id/range_bar"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:minHeight="100dp"
                                             android:layout_marginLeft="16dp"
                                             android:layout_marginRight="16dp"
+                                            android:minHeight="100dp"
                                             custom:tickEnd="12"
                                             custom:tickInterval="1"
                                             custom:tickStart="1" />
@@ -500,7 +501,13 @@
                                     android:adjustViewBounds="true"
                                     android:src="@drawable/ic_opportunity" />
 
-
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_margin="7dp"
+                                    android:text="Developed By Emobi Technologies Pvt. Ltd."/>
                             </LinearLayout>
 
                         </FrameLayout>
@@ -516,8 +523,8 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:fab="http://schemas.android.com/apk/res-auto"
             android:id="@+id/addFabLayoutContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:gravity="bottom|end">
 
